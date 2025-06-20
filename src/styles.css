@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+.bg-blue-material {
+    background-color: #d7e3ff;
+}
+
+.text-blue-material {
+    color: #005cbb;
+}
+
+.bg-blue-material-hover:hover {
+    background-color: #c6d8fa;  
+    transition: background-color 300ms ease-in-out;
+}
