@@ -12,3 +12,34 @@
     background-color: #c6d8fa;  
     transition: background-color 300ms ease-in-out;
 }
+
+@keyframes slideInRight{
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Aplicación de la animación al toast */
+.custom-toast {
+  animation: slideInRight 0.4s ease forwards;
+}
+
+.custom-toast.ng-animating.ng-leave {
+  animation: slideOutRight 0.4s ease forwards !important;
+}

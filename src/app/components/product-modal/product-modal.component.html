@@ -1,0 +1,93 @@
+<div class="flex items-center justify-between">
+    <h2 mat-dialog-title>
+        @if(data){
+            Update An Existent Product
+        } @else {
+            Add New Product
+        }
+
+    </h2>
+    <button 
+        matButton 
+        class="cursor-pointer mr-6 mt-4 hover:scale-90 transition-transform duration-200 ease-in-out" 
+        (click)="onNoClick()"
+    >
+        <mat-icon color="primary">close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content>
+
+    <form [formGroup]="formProduct" class="flex flex-col" (ngSubmit)="addProduct()">
+
+        @if(data){
+            <mat-form-field class="w-96">
+                <mat-label>ID</mat-label>
+                <input matInput type="text" formControlName="id" readonly="true">
+            </mat-form-field>  
+        }
+
+        <mat-form-field class="w-96">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name">
+        </mat-form-field>
+
+        @if(formProduct.controls['name'].hasError('required') && (formProduct.controls['name'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El nombre es requerido.</p>
+        }
+
+        <mat-form-field class="w-96">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" formControlName="price">
+        </mat-form-field>
+
+        @if(formProduct.controls['price'].hasError('required') && (formProduct.controls['price'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El precio es requerido.</p>
+        }
+        @if(formProduct.controls['price'].hasError('min') && (formProduct.controls['price'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El valor mínimo del precio es cero.</p>
+        }
+
+
+        <mat-form-field class="w-96">
+            <mat-label>Stock</mat-label>
+            <input matInput type="number" formControlName="stock">
+        </mat-form-field>
+
+        @if(formProduct.controls['stock'].hasError('required') && (formProduct.controls['stock'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El stock es requerido.</p>
+        }
+        @if(formProduct.controls['stock'].hasError('min') && (formProduct.controls['stock'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El valor mínimo del stock es cero.</p>
+        }
+        @if(formProduct.controls['stock'].hasError('max') && (formProduct.controls['stock'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El valor máximo es 1000.</p>
+        }
+
+        @if(!data){
+            <div class="flex justify-end">
+                <button 
+                    matButton 
+                    type="submit"
+                    class="px-4 py-2 rounded-full cursor-pointer bg-blue-material-hover text-blue-material" 
+                >
+                    Guardar
+                </button>
+    
+            </div>
+        } @else {
+            <div class="flex justify-end">
+                <button 
+                    matButton 
+                    type="submit"
+                    class="px-4 py-2 rounded-full cursor-pointer bg-blue-material-hover text-blue-material" 
+                >
+                    Actualizar
+                </button>
+    
+            </div>
+        }
+
+    </form>
+    
+</mat-dialog-content>
