@@ -4,7 +4,6 @@ import { routes } from './app.routes';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +14,7 @@ export const appConfig: ApplicationConfig = {
       ToastrModule.forRoot({
         positionClass: 'toast-top-right',
         toastClass: 'ngx-toastr custom-toast',
-        preventDuplicates: true
+        preventDuplicates: false,
       })
     )
   ]

@@ -51,4 +51,12 @@ export class ProductsService {
     }
   }
 
+  async deleteProduct(id: number){
+    try{
+      await api.delete(`products/${id}`)
+    }catch(e){
+      throw new Error("No se pudo eliminar el producto")
+    }
+  }
+
 }

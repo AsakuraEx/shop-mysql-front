@@ -9,11 +9,12 @@ import { ToastService } from '../../services/toast.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { InputModalComponent } from '../../components/input-modal/input-modal.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-products-index',
-  imports: [MatTableModule, MatButtonModule, MatInputModule, MatFormFieldModule],
+  imports: [MatTableModule, MatButtonModule, MatInputModule, MatFormFieldModule, MatIconModule],
   templateUrl: './products-index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -24,6 +25,7 @@ export class ProductsIndexComponent implements OnInit{
   dataSource = new MatTableDataSource<Products>()
   displayColumns = ['id', 'name', 'price', 'stock']
   productSelected: any
+  tableCount:number = 0;
 
   readonly dialog = inject(MatDialog)
 
@@ -49,6 +51,7 @@ export class ProductsIndexComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       if(result === true){
+        this.cancelSelect()
         this.loadProducts();
       }
     })
@@ -73,6 +76,7 @@ export class ProductsIndexComponent implements OnInit{
 
       dialogRef.afterClosed().subscribe(result => {
         if(result === true){
+          this.cancelSelect()
           this.loadProducts();
         }
       })
@@ -106,6 +110,7 @@ export class ProductsIndexComponent implements OnInit{
   
         dialogRef.afterClosed().subscribe(result => {
           if (result == true){
+            this.cancelSelect()
             this.loadProducts()
           }
         })
@@ -131,6 +136,7 @@ export class ProductsIndexComponent implements OnInit{
   
         dialogRef.afterClosed().subscribe(result => {
           if (result == true){
+            this.cancelSelect()
             this.loadProducts()
           }
         })
@@ -146,6 +152,21 @@ export class ProductsIndexComponent implements OnInit{
 
   cancelSelect() {
     this.productSelected = null
+  }
+
+  deleteProduct(product: any){
+    
+    if(product){
+      try{
+        this.service.deleteProduct(product.id)
+        this.loadProducts()
+      }catch(e){
+        this.toastService.toastError('Ocurrio un error al eliminar el elemento', 'Error')
+      }
+    }else{
+      this.toastService.toastError('Para eliminar un elemento, primero debe seleccionarlo de la tabla', 'Error')
+    }
+
   }
 
 }

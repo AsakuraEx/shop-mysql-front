@@ -47,10 +47,9 @@ export class ProductModalComponent {
     }
 
     const newProduct = this.formProduct.value;
-
     try {
 
-      if(!this.data.id){
+      if(!this.data){
         await this.service.addProduct(newProduct)
         this.isSubmitting = false
         this.toastService.toastSuccess('Se agregó el producto correctamente', '¡Creado!')
