@@ -47,7 +47,6 @@ export class ProductModalComponent {
     }
 
     const newProduct = this.formProduct.value;
-
     try {
 
       if(!this.data?.id){

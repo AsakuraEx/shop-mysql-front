@@ -16,7 +16,7 @@
 @keyframes slideInRight{
   from {
     transform: translateX(100%);
-    opacity: 0;
+    opacity: 1;
   }
   to {
     transform: translateX(0);
@@ -31,15 +31,16 @@
   }
   to {
     transform: translateX(100%);
-    opacity: 0;
+    opacity: 1;
   }
 }
 
 /* Aplicación de la animación al toast */
 .custom-toast {
-  animation: slideInRight 0.4s ease forwards;
+  width: 450px !important;
+  animation: slideInRight 0.3s ease-in forwards;
 }
 
 .custom-toast.ng-animating.ng-leave {
-  animation: slideOutRight 0.4s ease forwards !important;
+  animation: slideOutRight 0.3s ease-out forwards !important;
 }
