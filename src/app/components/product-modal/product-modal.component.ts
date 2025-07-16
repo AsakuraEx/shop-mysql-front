@@ -50,7 +50,7 @@ export class ProductModalComponent {
 
     try {
 
-      if(!this.data.id){
+      if(!this.data?.id){
         await this.service.addProduct(newProduct)
         this.isSubmitting = false
         this.toastService.toastSuccess('Se agregó el producto correctamente', '¡Creado!')

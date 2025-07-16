@@ -1,0 +1,105 @@
+<div class="flex items-center justify-between">
+    <h2 mat-dialog-title>
+        Add new Client
+    </h2>
+    <button 
+        matButton 
+        class="cursor-pointer mr-6 mt-4 hover:scale-90 transition-transform duration-200 ease-in-out" 
+        (click)="onNoClick()"
+    >
+        <mat-icon color="primary">close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content>
+
+    <form [formGroup]="formClient" class="flex flex-col" (ngSubmit)="addClient()">
+
+        <!-- @if(data){
+            <mat-form-field class="w-96">
+                <mat-label>ID</mat-label>
+                <input matInput type="text" formControlName="id" readonly="true">
+            </mat-form-field>  
+        } -->
+
+        <mat-form-field class="w-96">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name">
+        </mat-form-field>
+
+        @if(formClient.controls['name'].hasError('required') && (formClient.controls['name'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El nombre es requerido.</p>
+        }
+
+        <mat-form-field class="w-96">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email">
+        </mat-form-field>
+
+        @if(formClient.controls['email'].hasError('required') && (formClient.controls['email'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El email es requerido.</p>
+        }
+
+        @if(formClient.controls['email'].hasError('email') && (formClient.controls['email'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">Debe ingresar un email válido.</p>
+        }
+
+        <p class="text-xl font-light text-center">Address information</p>
+
+        <mat-form-field class="w-96">
+            <mat-label>Country</mat-label>
+            <input 
+                matInput type="text" 
+                formControlName="country"
+                [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    @for (item of filteredItems | async; track $index) {
+                        <mat-option [value]="item">{{ item }}</mat-option>
+                    }
+                </mat-autocomplete>
+        </mat-form-field>
+
+        @if(formClient.controls['country'].hasError('required') && (formClient.controls['country'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El pais es requerido.</p>
+        }
+
+        <mat-form-field class="w-96">
+            <mat-label>Province</mat-label>
+            <input matInput type="text" formControlName="province">
+        </mat-form-field>
+
+        @if(formClient.controls['province'].hasError('required') && (formClient.controls['province'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El departamento es requerido.</p>
+        }
+
+        <mat-form-field class="w-96">
+            <mat-label>Town</mat-label>
+            <input matInput type="text" formControlName="town">
+        </mat-form-field>
+
+        @if(formClient.controls['town'].hasError('required') && (formClient.controls['town'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El municipio es requerido.</p>
+        }
+
+        <mat-form-field class="w-96">
+            <mat-label>Street</mat-label>
+            <input matInput type="text" formControlName="street">
+        </mat-form-field>
+
+        @if(formClient.controls['street'].hasError('required') && (formClient.controls['street'].dirty || isSubmitting)){
+            <p class="text-red-700 pb-4">El municipio es requerido.</p>
+        }
+
+        <div class="flex justify-end">
+            <button 
+                matButton 
+                type="submit"
+                class="px-4 py-2 rounded-full cursor-pointer bg-blue-material-hover text-blue-material" 
+            >
+                Guardar
+            </button>
+
+        </div>
+
+    </form>
+</mat-dialog-content>
