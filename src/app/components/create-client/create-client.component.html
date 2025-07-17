@@ -1,6 +1,10 @@
 <div class="flex items-center justify-between">
     <h2 mat-dialog-title>
-        Add new Client
+        @if (data) {
+            Update a Client
+        }@else {
+            Add new Client
+        }
     </h2>
     <button 
         matButton 
@@ -13,16 +17,18 @@
 
 <mat-dialog-content>
 
-    <form [formGroup]="formClient" class="flex flex-col" (ngSubmit)="addClient()">
+    <form [formGroup]="formClient" class="flex flex-col h-full" (ngSubmit)="addClient()">
 
-        <!-- @if(data){
-            <mat-form-field class="w-96">
-                <mat-label>ID</mat-label>
-                <input matInput type="text" formControlName="id" readonly="true">
-            </mat-form-field>  
-        } -->
+        @if(data){
+            <div class="hidden">
+                <mat-form-field class="w-full">
+                    <mat-label>ID</mat-label>
+                    <input matInput type="text" formControlName="id" readonly="true">
+                </mat-form-field>  
+            </div>
+        }
 
-        <mat-form-field class="w-96">
+        <mat-form-field class="w-full">
             <mat-label>Name</mat-label>
             <input matInput type="text" formControlName="name">
         </mat-form-field>
@@ -31,7 +37,7 @@
             <p class="text-red-700 pb-4">El nombre es requerido.</p>
         }
 
-        <mat-form-field class="w-96">
+        <mat-form-field class="w-full">
             <mat-label>Email</mat-label>
             <input matInput type="email" formControlName="email">
         </mat-form-field>
@@ -46,7 +52,7 @@
 
         <p class="text-xl font-light text-center">Address information</p>
 
-        <mat-form-field class="w-96">
+        <mat-form-field class="w-full">
             <mat-label>Country</mat-label>
             <input 
                 matInput type="text" 
@@ -63,7 +69,7 @@
             <p class="text-red-700 pb-4">El pais es requerido.</p>
         }
 
-        <mat-form-field class="w-96">
+        <mat-form-field class="w-full">
             <mat-label>Province</mat-label>
             <input matInput type="text" formControlName="province">
         </mat-form-field>
@@ -72,7 +78,7 @@
             <p class="text-red-700 pb-4">El departamento es requerido.</p>
         }
 
-        <mat-form-field class="w-96">
+        <mat-form-field class="w-full">
             <mat-label>Town</mat-label>
             <input matInput type="text" formControlName="town">
         </mat-form-field>
@@ -81,7 +87,7 @@
             <p class="text-red-700 pb-4">El municipio es requerido.</p>
         }
 
-        <mat-form-field class="w-96">
+        <mat-form-field class="w-full">
             <mat-label>Street</mat-label>
             <input matInput type="text" formControlName="street">
         </mat-form-field>
@@ -96,7 +102,12 @@
                 type="submit"
                 class="px-4 py-2 rounded-full cursor-pointer bg-blue-material-hover text-blue-material" 
             >
-                Guardar
+                @if (data) {
+                    Actualizar
+                }
+                @else {
+                    Guardar
+                }
             </button>
 
         </div>

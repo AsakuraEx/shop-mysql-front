@@ -19,10 +19,15 @@ export class ClientsService {
 
   }
 
-  async addUser(client: Client){
+  async addClient(client: Client){
 
     return await api.post('/clients', client)
-    
+
+  }
+
+  async updateClient(client: Client){
+
+    return await api.put(`/clients/`, client)
 
   }
 
